@@ -1,0 +1,33 @@
+{
+	"e1": {
+		"id": 0,
+		"name": "Pavuk",
+		"gameprefs": {
+			"health": 100,
+			"damage": 10,
+			"cooldown": 0.1,
+			"projectiles": 1,
+			"speed": 200,
+			"attack_speed": 2
+		},
+		"techprefs": {
+			"sprite": "res://src/Player/Player.png",
+			"packedscene": "res://src/NPC/Enemy/Enemy.tscn"
+		}
+	},
+	"e2": {
+		"id": 1,
+		"name": "Traxer",
+		"gameprefs": {
+			"health": 200,
+			"damage": 100,
+			"cooldown": 0.2,
+			"projectiles": 1,
+			"speed": 20
+		},
+		"techprefs": {
+			"sprite": "res://src/Player/Player.png",
+			"packedscene": "res://src/NPC/Enemy/Enemy.tscn"
+		}
+	}
+}

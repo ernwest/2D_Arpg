@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dphvq4lp25mso"]
+
+[ext_resource type="Script" path="res://src/Spells/PlayerAoE.gd" id="1_1c414"]
+[ext_resource type="Texture2D" uid="uid://bxxnjqp01kft1" path="res://src/Spells/SpellTech/BlowUp.png" id="2_gu1c0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xl0hc"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q03cn"]
+radius = 128.0
+
+[node name="PlayerAoE" type="RigidBody2D" groups=["PlayerAoE"]]
+z_index = 1
+collision_layer = 4
+collision_mask = 16
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_1c414")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_gu1c0")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+scale = Vector2(0.1, 0.1)
+shape = SubResource("CircleShape2D_xl0hc")
+
+[node name="HitCol" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitCol"]
+scale = Vector2(0.1, 0.1)
+shape = SubResource("CircleShape2D_q03cn")

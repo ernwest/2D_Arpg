@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://3i4nmg845ri7"]
+
+[ext_resource type="Script" path="res://src/Player/Camera.gd" id="1_xscqe"]
+
+[node name="PlayerCamera" type="Camera2D" node_paths=PackedStringArray("player")]
+position = Vector2(10, 10)
+position_smoothing_speed = 15.0
+script = ExtResource("1_xscqe")
+player = NodePath("../Player")

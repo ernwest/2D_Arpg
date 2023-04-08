@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf4qbmr7ryn05"]
+
+[ext_resource type="AudioStream" uid="uid://b80x8jw8xw8bj" path="res://src/audio/RPGSoundPack/inventory/armor-light.wav" id="1_ei5m8"]
+
+[node name="Death_Audio" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_ei5m8")
+volume_db = -15.0
+max_distance = 1000.0

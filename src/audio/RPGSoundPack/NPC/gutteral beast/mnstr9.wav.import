@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cyrf16rgg68jx"
+path="res://.godot/imported/mnstr9.wav-aa592e3ae8bb5de76e7d39faca9cf7a9.sample"
+
+[deps]
+
+source_file="res://src/audio/RPGSoundPack/NPC/gutteral beast/mnstr9.wav"
+dest_files=["res://.godot/imported/mnstr9.wav-aa592e3ae8bb5de76e7d39faca9cf7a9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,93 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkbqs4o145g3p"]
+
+[ext_resource type="Script" path="res://src/UI/UI_Script.gd" id="1_bolpd"]
+
+[sub_resource type="Theme" id="Theme_20wq0"]
+
+[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("health_text", "mana_text")]
+script = ExtResource("1_bolpd")
+health_text = NodePath("Window/SliceWindow/Lower/SliceLower/Left/HealthTextBar/Health_Number")
+mana_text = NodePath("Window/SliceWindow/Lower/SliceLower/Right/ManaTextBar/Mana_Number")
+
+[node name="Window" type="Container" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_20wq0")
+
+[node name="SliceWindow" type="VBoxContainer" parent="Window"]
+layout_mode = 2
+
+[node name="Upper" type="AspectRatioContainer" parent="Window/SliceWindow"]
+custom_minimum_size = Vector2(1440, 700)
+layout_mode = 2
+
+[node name="Lower" type="AspectRatioContainer" parent="Window/SliceWindow"]
+custom_minimum_size = Vector2(1440, 200)
+layout_mode = 2
+
+[node name="SliceLower" type="HBoxContainer" parent="Window/SliceWindow/Lower"]
+custom_minimum_size = Vector2(1440, 0)
+layout_mode = 2
+
+[node name="Left" type="AspectRatioContainer" parent="Window/SliceWindow/Lower/SliceLower"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="HealthTextBar" type="HBoxContainer" parent="Window/SliceWindow/Lower/SliceLower/Left"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Health_Text" type="RichTextLabel" parent="Window/SliceWindow/Lower/SliceLower/Left/HealthTextBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Health:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Health_Number" type="RichTextLabel" parent="Window/SliceWindow/Lower/SliceLower/Left/HealthTextBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "100 / 100
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Center" type="AspectRatioContainer" parent="Window/SliceWindow/Lower/SliceLower"]
+custom_minimum_size = Vector2(840, 0)
+layout_mode = 2
+
+[node name="Right" type="AspectRatioContainer" parent="Window/SliceWindow/Lower/SliceLower"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="ManaTextBar" type="HBoxContainer" parent="Window/SliceWindow/Lower/SliceLower/Right"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Mana_Text" type="RichTextLabel" parent="Window/SliceWindow/Lower/SliceLower/Right/ManaTextBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Mana:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Mana_Number" type="RichTextLabel" parent="Window/SliceWindow/Lower/SliceLower/Right/ManaTextBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "100 / 100
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

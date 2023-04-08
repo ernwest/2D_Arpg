@@ -1,0 +1,39 @@
+{
+	"skill1": {
+		"id": 0,
+		"name": "Fireball",
+		"type": 0,
+		"gameprefs": {
+			"manacost": 10,
+			"damage": 200,
+			"cooldown": 0.5,
+			"aoe": 1,
+			"projectiles": 3,
+			"pierce": 5,
+			"speed": 700,
+			"angle": 5
+		},
+		"techprefs": {
+			"lifetime": 1,
+			"sprite": "res://src/Spells/SpellTech/Thunder.png",
+			"audio": "res://src/audio/RPGSoundPack/battle/swing2.wav"
+		}
+	},
+	"skill2": {
+		"id": 1,
+		"name": "Blow",
+		"type": 1,
+		"gameprefs": {
+			"manacost": 20,
+			"damage": 150,
+			"cooldown": 1,
+			"hit_cd": 0.1,
+			"aoe": 8
+		},
+		"techprefs": {
+			"lifetime": 2,
+			"sprite": "res://src/Spells/SpellTech/BlowUp.png",
+			"audio": "res://src/audio/rpgsfx/spell_fire_05.ogg"
+		}
+	}
+}

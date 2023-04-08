@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpanbrhmc7s4e"]
+
+[ext_resource type="Script" path="res://src/NPC/Enemy/Enemy.gd" id="1_yxlr3"]
+[ext_resource type="Texture2D" uid="uid://7j3kusbhn27e" path="res://icon.svg" id="2_2g0dd"]
+[ext_resource type="PackedScene" uid="uid://ckx617wua4nlb" path="res://src/NPC/Enemy/explosive.tscn" id="2_ggma7"]
+[ext_resource type="PackedScene" uid="uid://bf4qbmr7ryn05" path="res://src/NPC/Enemy/death_audio.tscn" id="3_l2ns0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3k1lr"]
+radius = 90.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sxwsl"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2yc16"]
+radius = 400.0
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+z_index = 3
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_yxlr3")
+explosive = ExtResource("2_ggma7")
+death_audio = ExtResource("3_l2ns0")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 3
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_2g0dd")
+
+[node name="CollisionDetection" type="Area2D" parent="."]
+scale = Vector2(0.6, 0.6)
+collision_layer = 16
+collision_mask = 5
+
+[node name="Collision" type="CollisionShape2D" parent="CollisionDetection"]
+z_index = 3
+shape = SubResource("CircleShape2D_3k1lr")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sxwsl")
+
+[node name="ViewArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="Collision" type="CollisionShape2D" parent="ViewArea"]
+shape = SubResource("CircleShape2D_2yc16")
+
+[connection signal="body_entered" from="CollisionDetection" to="." method="_on_collision_detection_body_entered"]
+[connection signal="body_exited" from="CollisionDetection" to="." method="_on_collision_detection_body_exited"]
+[connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
