@@ -3,12 +3,12 @@ class_name Enemy extends NPC
 @export var explosive: PackedScene
 @export var death_audio: PackedScene
 
+var health_bar: Range
+
 var playernode: Player
 var go_to_player: bool
 var _name: String
 var prefs: Dictionary = {}
-
-var dead: bool = false;
 
 var is_playeraoe_hitting: bool = false
 var is_player_aoe_can_hit: bool = true
@@ -17,12 +17,15 @@ var playeraoe_spell: Spell
 var is_player_close: bool = false
 var can_hit_player: bool = true
 
+var test: int = 0
+
 func _ready():
-	print( prefs )
+	health_bar = get_node_or_null("health_bar")
+	if health_bar == null: queue_free()
+	health_bar_calc()
 
 func _process(delta):
-	if dead: return
-	
+	health_bar_calc()
 	
 	if is_playeraoe_hitting and is_player_aoe_can_hit:
 		playeraoe_hit(playeraoe_spell)
@@ -35,6 +38,14 @@ func _process(delta):
 		velocity = velocity.normalized()
 		velocity *= prefs.speed
 		move_and_slide()
+		
+func health_bar_calc():
+	if prefs.health <= 0: prefs.health = 1
+	var percent: int = 100*prefs.current_health / prefs.health
+	health_bar.value = percent
+	
+	if percent == 100: health_bar.visible = false
+	else: health_bar.visible = true
 		
 func _on_collision_detection_body_entered(body):
 	if body.is_in_group("Projectile"):
@@ -53,10 +64,10 @@ func _on_collision_detection_body_exited(body):
 
 func projectile_hit(_spell: Spell):
 	var damage: int = _spell.gameprefs.damage
-	prefs.health -= damage
+	prefs.current_health -= damage
 	_spell.hit()
 	
-	if prefs.health <= 0:
+	if prefs.current_health <= 0:
 		die()
 		
 func playeraoe_hit(_spell: Spell):
@@ -65,10 +76,10 @@ func playeraoe_hit(_spell: Spell):
 		is_playeraoe_hitting = true
 	
 	var damage: int = _spell.gameprefs.damage
-	prefs.health -= damage
+	prefs.current_health -= damage
 	_spell.hit()
 	
-	if prefs.health <= 0:
+	if prefs.current_health <= 0:
 		die()
 		
 	is_player_aoe_can_hit = false

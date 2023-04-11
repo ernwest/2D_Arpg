@@ -10,7 +10,8 @@ var scene_tree: Node2D
 
 enum ETYPE {
 	Projectile,
-	PlayerAoE
+	PlayerAoE,
+	Aura
 }
 
 func set_dict(spell: Dictionary = {}):

@@ -19,22 +19,25 @@ var prefs: Dictionary = {
 	"mana_regen" = 5,
 	"mana_regen_percent" = 5,
 	
-	"evasion" = 5000, # 1000 = 10%
+	"evasion" = 1000, # 1000 = 10%
 	"armor" = 1000, # 1000 = 10%
 	
-	#"evasion_percent" = 10,
-	#"armor_percent" = 10,
-	
-	"vampiric_health" = 10, # percent from damage
+	"vampiric_health" = 5, # percent from damage
 	"vampiric_mana" = 1, # percent from damage
 	
-	"speed_multi" = 7.2,
+	"speed_multi" = 3.2,
 	
-	"added_damage" = 800,
+	"added_damage" = 100,
+	"added_projectile_damage" = 100,
+	"added_aoe_damage" = 100,
+	
 	"added_projectiles" = 3,
 	
-	"inc_damage" = 1.1,
-	"inc_aoe" = 2.0,
+	"inc_damage" = 1.0,
+	"inc_projectile_damage" = 1.0,
+	"inc_aoe_damage" = 1.0,
+	
+	"inc_aoe_radius" = 2.0,
 	
 	"red_cooldown" = 2.0
 }

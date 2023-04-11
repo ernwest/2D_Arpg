@@ -42,13 +42,15 @@ func create_mob_node():
 	enemy_node.prefs = npc.gameprefs.duplicate(true)
 	sync_prefs_with_global(enemy_node.prefs)
 	
+	enemy_node.prefs.current_health = enemy_node.prefs.health
+	
 	enemy_node.position = position
 	
 	return enemy_node
 	
-func spawn_mobs(mob_node: Enemy):
+func spawn_mobs(_mob_node: Enemy):
 	for i in range(0, mob_count):
-		var node: Enemy = mob_node.clone_enemy()
+		var node: Enemy = _mob_node.clone_enemy()
 		node.position = get_rand_position()
 		self.add_child(node)
 	

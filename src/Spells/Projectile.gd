@@ -65,22 +65,22 @@ func fire_proj(node_spell: Spell, angle: int, i: int, step: int):
 
 	return -angle
 	
-func fire_proj_2(node_spell: Spell, angle: int, i: int, step: int):
-	var copy: Spell = node_spell.clone_spell()
-
-	if i % 2 == 0:
-		angle = -(abs(angle)+step)
-
-	player_circle.rotation_degrees += angle
-
-	copy.position = player_circle_side.global_position
-	copy.rotation_degrees = player_circle.rotation_degrees
-
-	scene_tree.add_child(copy)
-	copy.start()
-
-	return -angle
-	
-	
+#func fire_proj_2(node_spell: Spell, angle: int, i: int, step: int):
+#	var copy: Spell = node_spell.clone_spell()
+#
+#	if i % 2 == 0:
+#		angle = -(abs(angle)+step)
+#
+#	player_circle.rotation_degrees += angle
+#
+#	copy.position = player_circle_side.global_position
+#	copy.rotation_degrees = player_circle.rotation_degrees
+#
+#	scene_tree.add_child(copy)
+#	copy.start()
+#
+#	return -angle
+#
+#
 	
 	

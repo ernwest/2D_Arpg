@@ -1,5 +1,8 @@
 extends Player
 
+@export var ui_main: CanvasLayer
+@export var ui_inventory: CanvasLayer
+
 var default_vars: GDScript = preload("res://src/Player/Def_vars.gd")
 
 var player: Player
@@ -14,8 +17,10 @@ var move_vector: Vector2 = Vector2.ZERO
 var speed_sum: float  = default_vars.speed
 
 var audio: AudioStreamPlayer2D
+var camera: Camera2D
 
 var is_regen: bool = false
+var is_moving: bool = false
 
 # Player info
 var _n: String = "Alo da"
@@ -27,6 +32,7 @@ func _ready():
 	player_circle = $Circle
 	player_circle_side = $Circle/Circle_side
 	audio = $Audio
+	camera = $"../PlayerCamera"
 	
 	spell_bar.push_spells_to_bar(_cl)
 	player_creator(player)
@@ -60,16 +66,28 @@ func regen():
 	is_regen = false
 	
 func player_circle_look_at():
-	player_circle.look_at( mouse_pos_in_world() )
+	player_circle.look_at( get_global_mouse_position() )
 
 func player_creator(_player: Player):
 	_player.fill_player_info(_n, _cl)
 
 func move_input_handler():
 	move_vector = Vector2.ZERO
+	is_moving = false
+	mouse_input()
+	keyboard_input()
+		
+func mouse_input():
 	if Input.is_action_pressed("LMB"):
+		if ui_inventory.mouse_in_inventory: return
 		var mouse_pos: Vector2 = mouse_pos_relative_player()
+		if mouse_pos != Vector2.ZERO:
+			is_moving = true
 		move_vector = mouse_pos
+		
+func keyboard_input():
+	if Input.is_action_just_pressed("Inventory"):
+		ui_inventory.change_visible()
 
 func spell_input_handler():
 	if Input.is_action_pressed("Q") and skills_cooldowns[0]:
@@ -125,9 +143,11 @@ func spell_node_creator(spell: Dictionary):
 	
 	var updated_spell: Dictionary = sync_spell_with_player(spell)
 	
-	var _scale: int = updated_spell.gameprefs.aoe
-	node_sprite.scale *= _scale
-	node_collision.scale *= _scale
+	if updated_spell.gameprefs.has("aoe"):
+		var _scale: int = updated_spell.gameprefs.aoe
+		node_sprite.scale *= _scale
+		node_collision.scale *= _scale
+		
 	node_sprite.texture = texture
 	
 	node_spell.set_props(updated_spell)
@@ -138,27 +158,30 @@ func sync_spell_with_player(_spell: Dictionary):
 	var s_prefs: Dictionary = _spell.gameprefs
 	var p_prefs: Dictionary = player.prefs
 	
-	s_prefs.damage += p_prefs.added_damage
-	s_prefs.damage *= p_prefs.inc_damage
+	if _spell.type != Spell.ETYPE.Aura:
+		s_prefs.damage += p_prefs.added_damage
+		s_prefs.damage *= p_prefs.inc_damage
 	
 	if _spell.type == Spell.ETYPE.Projectile:
+		s_prefs.damage += p_prefs.added_projectile_damage
+		s_prefs.damage *= p_prefs.inc_projectile_damage
 		s_prefs.projectiles += p_prefs.added_projectiles
 	
 	if _spell.type == Spell.ETYPE.PlayerAoE:
+		s_prefs.damage += p_prefs.added_aoe_damage
+		s_prefs.damage *= p_prefs.inc_aoe_damage
+		s_prefs.aoe *= p_prefs.inc_aoe
+		
+	if _spell.type == Spell.ETYPE.Aura:
 		s_prefs.aoe *= p_prefs.inc_aoe
 	
 	return _spell
-	
+
 func get_packed_spell_node(t: int):
-	var return_packed: PackedScene
 	match(t):
-		0:
-			return_packed = default_vars.projectile_node
-		1:
-			return_packed = default_vars.playeraoe_node
-		2:
-			return_packed = default_vars.enemyaoe_node
-	return return_packed
+		0: return default_vars.projectile_node
+		1: return default_vars.playeraoe_node
+		2: return default_vars.aura_node
 
 func hit_player(dmg: int):
 	# Check for evasion first
@@ -175,28 +198,8 @@ func hit_player(dmg: int):
 	dmg = clamp(dmg, 0, abs(dmg))
 	
 	player.prefs.current_health -= dmg
-	
-	
-	
-	
-	
-	
 
 func mouse_pos_relative_player():
-	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	mouse_pos.x -= get_viewport().size.x/2
-	mouse_pos.y -= get_viewport().size.y/2
+	var mouse_pos: Vector2 = get_global_mouse_position()
 	mouse_pos = mouse_pos.normalized()
 	return mouse_pos
-
-func mouse_pos_in_world():
-	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	mouse_pos.x -= get_viewport().size.x/2
-	mouse_pos.y -= get_viewport().size.y/2
-	mouse_pos += player.position
-	return mouse_pos
-
-
-
-
-
