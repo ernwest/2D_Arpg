@@ -23,7 +23,6 @@ ModsEnemies="*res://src/NPC/Enemy/Mods_enemies.gd"
 
 window/size/viewport_width=1440
 window/size/viewport_height=900
-window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"

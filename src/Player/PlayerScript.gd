@@ -170,27 +170,21 @@ func sync_spell_with_player(_spell: Dictionary):
 	if _spell.type == Spell.ETYPE.PlayerAoE:
 		s_prefs.damage += p_prefs.added_aoe_damage
 		s_prefs.damage *= p_prefs.inc_aoe_damage
-		s_prefs.aoe *= p_prefs.inc_aoe
+		s_prefs.aoe *= p_prefs.inc_aoe_radius
 		
 	if _spell.type == Spell.ETYPE.Aura:
-		s_prefs.aoe *= p_prefs.inc_aoe
+		s_prefs.aoe *= p_prefs.inc_aoe_radius
 	
 	return _spell
 
 func get_packed_spell_node(t: int):
-	match(t):
-		0: return default_vars.projectile_node
-		1: return default_vars.playeraoe_node
-		2: return default_vars.aura_node
+	return default_vars.spell_nodes[t]
 
 func hit_player(dmg: int):
-	# Check for evasion first
 	var evade: int = player.prefs.evasion / 100
 	evade = clamp(evade, 0, default_vars.maximum_evade)
-	
 	if randi_range(0, 100) <= evade: return
 	
-	# Calc reductions
 	var armor: int = player.prefs.armor / 100
 	armor = clamp(armor, 0, default_vars.maximum_armor)
 	
@@ -201,5 +195,6 @@ func hit_player(dmg: int):
 
 func mouse_pos_relative_player():
 	var mouse_pos: Vector2 = get_global_mouse_position()
+	mouse_pos -= position
 	mouse_pos = mouse_pos.normalized()
 	return mouse_pos
