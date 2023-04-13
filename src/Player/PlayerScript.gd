@@ -21,6 +21,8 @@ var camera: Camera2D
 
 var is_regen: bool = false
 var is_moving: bool = false
+var _mouse_in_inventory: bool = false
+var _mouse_entered: bool = false
 
 # Player info
 var _n: String = "Alo da"
@@ -79,7 +81,7 @@ func move_input_handler():
 		
 func mouse_input():
 	if Input.is_action_pressed("LMB"):
-		if ui_inventory.mouse_in_inventory: return
+		if _mouse_in_inventory: return
 		var mouse_pos: Vector2 = mouse_pos_relative_player()
 		if mouse_pos != Vector2.ZERO:
 			is_moving = true

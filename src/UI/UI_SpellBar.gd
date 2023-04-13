@@ -13,10 +13,16 @@ func fill_spell_bar_ui():
 	var ui_spell_node: Node = spell_ui.instantiate()
 	
 	for i in spells_count:
-		var new_node: Control = ui_spell_node.duplicate(true)
+		var new_node: Control = ui_spell_node.duplicate()
 		var butt: Button = new_node.get_node("Button")
-		butt.button_down.connect(_on_spell_pressed)
+		butt.button_down.connect(_on_spell_pressed.bind(new_node))
+		
+		set_node(new_node, spell_bar.spell_bar[i])
 		add_child(new_node)
+		
+func set_node(_node: Node, spell: Dictionary):
+	_node.set_spell_name(spell.name)
+	_node.set_spell_prefs(spell.gameprefs)
 
-func _on_spell_pressed():
-	print(123)
+func _on_spell_pressed(new_node):
+	print(new_node.spell_name)

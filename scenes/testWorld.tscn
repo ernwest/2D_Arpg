@@ -95,8 +95,9 @@ script = ExtResource("5_3thw3")
 min_mob_count = 5
 max_mob_count = 10
 
-[node name="Inventory" parent="." instance=ExtResource("6_ogx32")]
+[node name="Inventory" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ogx32")]
 visible = false
+player = NodePath("../Player")
 
 [node name="PlayerUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_ar70q")]
 player = NodePath("../Player")
