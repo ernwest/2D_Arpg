@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cbdm8entuk5yc" path="res://src/Player/Player.tscn" id="1_n5ok5"]
 [ext_resource type="Texture2D" uid="uid://co6d4oftvg083" path="res://src/World/grass1.png" id="2_k7tht"]
 [ext_resource type="Script" path="res://src/NPC/EnemyCreator.gd" id="5_3thw3"]
-[ext_resource type="PackedScene" uid="uid://dkbqs4o145g3p" path="res://src/UI/PlayerUI.tscn" id="5_ar70q"]
+[ext_resource type="PackedScene" uid="uid://bqp4i8pif3dyu" path="res://src/UI/PlayerUI.tscn" id="5_ar70q"]
 [ext_resource type="PackedScene" uid="uid://dfeaddikbtakg" path="res://src/UI/Inventory.tscn" id="6_ogx32"]
 [ext_resource type="Script" path="res://src/NPC/NPCLoader.gd" id="6_qel0s"]
 

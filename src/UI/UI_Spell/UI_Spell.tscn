@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://lhms84reke75"]
+
+[ext_resource type="Texture2D" uid="uid://7j3kusbhn27e" path="res://icon.svg" id="1_o2tam"]
+
+[node name="UI_Spell" type="AspectRatioContainer"]
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+icon = ExtResource("1_o2tam")
+flat = true
+icon_alignment = 1
+expand_icon = true
