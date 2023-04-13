@@ -1,11 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkbqs4o145g3p"]
+[gd_scene load_steps=3 format=3 uid="uid://dkbqs4o145g3p"]
 
 [ext_resource type="Script" path="res://src/UI/UI_Script.gd" id="1_bolpd"]
+[ext_resource type="Texture2D" uid="uid://7j3kusbhn27e" path="res://icon.svg" id="2_6marh"]
 
-[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("health_text", "mana_text")]
+[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("health_text", "mana_text", "Container_SkillBar", "Skill_Bar")]
 script = ExtResource("1_bolpd")
-health_text = NodePath("Lower/Left/HBoxContainer/Life_count")
-mana_text = NodePath("Lower/Right/HBoxContainer/Mana_count")
+health_text = NodePath("Lower/HBoxContainer/Left/HBoxContainer/Life_count")
+mana_text = NodePath("Lower/HBoxContainer/Right/HBoxContainer/Mana_count")
+Container_SkillBar = NodePath("Lower/HBoxContainer/Center")
+Skill_Bar = NodePath("Lower/HBoxContainer/Center/Skillbar")
 
 [node name="Lower" type="Control" parent="."]
 layout_mode = 3
@@ -15,22 +18,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Left" type="AspectRatioContainer" parent="Lower"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Lower"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.2
+anchor_top = 0.4
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -0.400024
-offset_right = -0.280006
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Lower/Left"]
+[node name="Left" type="AspectRatioContainer" parent="Lower/HBoxContainer"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Lower/HBoxContainer/Left"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Life" type="RichTextLabel" parent="Lower/Left/HBoxContainer"]
+[node name="Life" type="RichTextLabel" parent="Lower/HBoxContainer/Left/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -39,7 +49,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Life_count" type="RichTextLabel" parent="Lower/Left/HBoxContainer"]
+[node name="Life_count" type="RichTextLabel" parent="Lower/HBoxContainer/Left/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
@@ -48,35 +58,67 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Center" type="AspectRatioContainer" parent="Lower"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.2
-anchor_right = 0.8
-anchor_bottom = 1.0
-offset_left = -0.400024
-offset_top = 0.0999756
-offset_right = 0.200012
-grow_horizontal = 2
-grow_vertical = 0
-metadata/_edit_use_anchors_ = true
+[node name="Center" type="AspectRatioContainer" parent="Lower/HBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Right" type="AspectRatioContainer" parent="Lower"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.8
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 0
-metadata/_edit_use_anchors_ = true
+[node name="Skillbar" type="HBoxContainer" parent="Lower/HBoxContainer/Center"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Lower/Right"]
+[node name="Container" type="AspectRatioContainer" parent="Lower/HBoxContainer/Center/Skillbar"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Lower/HBoxContainer/Center/Skillbar/Container"]
+texture = ExtResource("2_6marh")
+offset = Vector2(64, 64)
+
+[node name="Container2" type="AspectRatioContainer" parent="Lower/HBoxContainer/Center/Skillbar"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Lower/HBoxContainer/Center/Skillbar/Container2"]
+texture = ExtResource("2_6marh")
+offset = Vector2(64, 64)
+
+[node name="Container3" type="AspectRatioContainer" parent="Lower/HBoxContainer/Center/Skillbar"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Lower/HBoxContainer/Center/Skillbar/Container3"]
+texture = ExtResource("2_6marh")
+offset = Vector2(64, 64)
+
+[node name="Container4" type="AspectRatioContainer" parent="Lower/HBoxContainer/Center/Skillbar"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Lower/HBoxContainer/Center/Skillbar/Container4"]
+texture = ExtResource("2_6marh")
+offset = Vector2(64, 64)
+
+[node name="Right" type="AspectRatioContainer" parent="Lower/HBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Lower/HBoxContainer/Right"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Mana" type="RichTextLabel" parent="Lower/Right/HBoxContainer"]
+[node name="Mana" type="RichTextLabel" parent="Lower/HBoxContainer/Right/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -86,7 +128,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Mana_count" type="RichTextLabel" parent="Lower/Right/HBoxContainer"]
+[node name="Mana_count" type="RichTextLabel" parent="Lower/HBoxContainer/Right/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4

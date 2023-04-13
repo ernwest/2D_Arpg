@@ -35,7 +35,7 @@ var prefs: Dictionary = {
 	
 	"inc_damage" = 1.0,
 	"inc_projectile_damage" = 1.0,
-	"inc_aoe_damage" = 2.0,
+	"inc_aoe_damage" = 5.0,
 	
 	"inc_aoe_radius" = 2.0,
 	

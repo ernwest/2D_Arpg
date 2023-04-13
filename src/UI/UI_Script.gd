@@ -5,12 +5,25 @@ extends CanvasLayer
 @export var health_text: RichTextLabel
 @export var mana_text: RichTextLabel
 
+@export var Container_SkillBar: AspectRatioContainer
+@export var Skill_Bar: HBoxContainer
+
 var caret: String = " / "
 
 var current_health: int
 var max_health: int 
 var current_mana: int
 var max_mana: int 
+
+func _ready():
+	Skill_Bar.custom_minimum_size.x = get_viewport().size.x/5
+	
+	# На время пока картинка 128*128. Надо сделать картинки 64*64 и удалить код
+	# {
+	for i in range(0, Skill_Bar.get_child_count()):
+		Skill_Bar.get_child(i).get_node("Sprite2D").scale *= 0.5
+	# }
+	
 
 func _physics_process(delta):
 	current_health = player.prefs.current_health
