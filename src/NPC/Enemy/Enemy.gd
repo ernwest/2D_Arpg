@@ -128,7 +128,6 @@ func clone_enemy():
 	var new_node: Enemy
 	
 	new_node = node.duplicate()
-#	new_node.get_node()
 
 	new_node._name = node._name
 	new_node.prefs = node.prefs.duplicate(true)

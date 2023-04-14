@@ -15,7 +15,8 @@
 		"techprefs": {
 			"lifetime": 1,
 			"sprite": "res://src/Spells/SpellTech/Thunder.png",
-			"audio": "res://src/audio/RPGSoundPack/battle/swing2.wav"
+			"audio": "res://src/audio/RPGSoundPack/battle/swing2.wav",
+			"ui_icon": "res://src/UI/icons/eye.png"
 		}
 	},
 	"skill2": {
@@ -32,7 +33,8 @@
 		"techprefs": {
 			"lifetime": 2,
 			"sprite": "res://src/Spells/SpellTech/BlowUp.png",
-			"audio": "res://src/audio/rpgsfx/spell_fire_05.ogg"
+			"audio": "res://src/audio/rpgsfx/spell_fire_05.ogg",
+			"ui_icon": "res://src/UI/icons/sun.png"
 		}
 	}
 }

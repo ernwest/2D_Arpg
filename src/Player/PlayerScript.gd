@@ -21,8 +21,6 @@ var camera: Camera2D
 
 var is_regen: bool = false
 var is_moving: bool = false
-var _mouse_in_inventory: bool = false
-var _mouse_entered: bool = false
 
 # Player info
 var _n: String = "Alo da"
@@ -31,6 +29,7 @@ var _cl: PlayerClass = Mage.new()
 
 func _ready():
 	player = self
+	GUI.player = player
 	player_circle = $Circle
 	player_circle_side = $Circle/Circle_side
 	audio = $Audio
@@ -81,7 +80,7 @@ func move_input_handler():
 		
 func mouse_input():
 	if Input.is_action_pressed("LMB"):
-		if _mouse_in_inventory: return
+		if GUI._mouse_in_ui: return
 		var mouse_pos: Vector2 = mouse_pos_relative_player()
 		if mouse_pos != Vector2.ZERO:
 			is_moving = true
@@ -89,7 +88,7 @@ func mouse_input():
 		
 func keyboard_input():
 	if Input.is_action_just_pressed("Inventory"):
-		ui_inventory.change_visible()
+		GUI.change_visible(ui_inventory)
 
 func spell_input_handler():
 	if Input.is_action_pressed("Q") and skills_cooldowns[0]:

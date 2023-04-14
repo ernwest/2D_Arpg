@@ -3,7 +3,12 @@ extends HBoxContainer
 var spell_bar: SpellBar
 @export var spell_ui: PackedScene
 
+var ui_spellchooser: GridContainer
+
+var hotkeys: Array = ["Q", "W", "E", "R"]
+
 func _ready():
+	ui_spellchooser = get_tree().get_current_scene().get_node("UI_SpellChooser/Cont/Panel/Grid")
 	spell_bar = get_tree().get_current_scene().get_node("Player").spell_bar
 	fill_spell_bar_ui()
 	
@@ -13,16 +18,34 @@ func fill_spell_bar_ui():
 	var ui_spell_node: Node = spell_ui.instantiate()
 	
 	for i in spells_count:
-		var new_node: Control = ui_spell_node.duplicate()
-		var butt: Button = new_node.get_node("Button")
-		butt.button_down.connect(_on_spell_pressed.bind(new_node))
+		ui_create_spells(ui_spell_node, i, self)
+		ui_create_spells(ui_spell_node, i, ui_spellchooser)
 		
-		set_node(new_node, spell_bar.spell_bar[i])
-		add_child(new_node)
+func ui_create_spells(_node: Node, i: int, parent: Node):
+	var new_node: Control = _node.duplicate()
+	var butt: Button = new_node.get_node("Button")
+	butt.button_down.connect(_on_spell_pressed.bind(new_node))
+		
+	set_node(new_node, spell_bar.spell_bar[i])
+	new_node.set_hotkey(hotkeys[i])
+	
+	if parent == ui_spellchooser:
+		new_node.is_spellchooser = true
+	
+	parent.add_child(new_node)
 		
 func set_node(_node: Node, spell: Dictionary):
 	_node.set_spell_name(spell.name)
 	_node.set_spell_prefs(spell.gameprefs)
+	_node.set_ui_icon(spell.techprefs.ui_icon)
 
 func _on_spell_pressed(new_node):
-	print(new_node.spell_name)
+	if new_node.is_spellchooser:
+		print(321)
+	else:
+		print(1123)
+	
+	
+	
+	
+	

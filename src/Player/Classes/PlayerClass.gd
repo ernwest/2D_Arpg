@@ -9,7 +9,6 @@ enum EPlayerClass {
 	Mage,
 	Warrior
 }
-
 func _init():
 	var path: String = pl_class
 	

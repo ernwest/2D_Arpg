@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bva77677wu3cc"]
+[gd_scene load_steps=12 format=3 uid="uid://bva77677wu3cc"]
 
 [ext_resource type="PackedScene" uid="uid://3i4nmg845ri7" path="res://src/Player/player_camera.tscn" id="1_kl03n"]
 [ext_resource type="PackedScene" uid="uid://cbdm8entuk5yc" path="res://src/Player/Player.tscn" id="1_n5ok5"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bqp4i8pif3dyu" path="res://src/UI/PlayerUI.tscn" id="5_ar70q"]
 [ext_resource type="PackedScene" uid="uid://dfeaddikbtakg" path="res://src/UI/Inventory.tscn" id="6_ogx32"]
 [ext_resource type="Script" path="res://src/NPC/NPCLoader.gd" id="6_qel0s"]
+[ext_resource type="PackedScene" uid="uid://d0y1q0e0f6y3l" path="res://src/UI/UI_SpellChooser.tscn" id="8_vdi53"]
 
 [sub_resource type="GDScript" id="GDScript_ahgsw"]
 script/source = "extends Node2D
@@ -95,9 +96,10 @@ script = ExtResource("5_3thw3")
 min_mob_count = 5
 max_mob_count = 10
 
-[node name="Inventory" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ogx32")]
+[node name="Inventory" parent="." instance=ExtResource("6_ogx32")]
 visible = false
-player = NodePath("../Player")
 
 [node name="PlayerUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_ar70q")]
 player = NodePath("../Player")
+
+[node name="UI_SpellChooser" parent="." instance=ExtResource("8_vdi53")]
