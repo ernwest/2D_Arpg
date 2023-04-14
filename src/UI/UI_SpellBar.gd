@@ -3,12 +3,17 @@ extends HBoxContainer
 var spell_bar: SpellBar
 @export var spell_ui: PackedScene
 
+var ui_spellchooser_main: CanvasLayer
 var ui_spellchooser: GridContainer
+
+var pressed_spell: Node
 
 var hotkeys: Array = ["Q", "W", "E", "R"]
 
 func _ready():
-	ui_spellchooser = get_tree().get_current_scene().get_node("UI_SpellChooser/Cont/Panel/Grid")
+	ui_spellchooser_main = get_tree().get_current_scene().get_node("UI_SpellChooser")
+	ui_spellchooser = ui_spellchooser_main.get_node("Cont/Panel/Grid")
+	
 	spell_bar = get_tree().get_current_scene().get_node("Player").spell_bar
 	fill_spell_bar_ui()
 	
@@ -36,14 +41,15 @@ func ui_create_spells(_node: Node, i: int, parent: Node):
 		
 func set_node(_node: Node, spell: Dictionary):
 	_node.set_spell_name(spell.name)
-	_node.set_spell_prefs(spell.gameprefs)
+	_node.set_spell_prefs(spell)
 	_node.set_ui_icon(spell.techprefs.ui_icon)
 
 func _on_spell_pressed(new_node):
 	if new_node.is_spellchooser:
-		print(321)
+		GUI.change_spellbar(new_node, pressed_spell, ui_spellchooser_main)
 	else:
-		print(1123)
+		pressed_spell = new_node
+		GUI.change_visible(ui_spellchooser_main, true)
 	
 	
 	

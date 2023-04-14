@@ -2,10 +2,10 @@ extends Node
 
 var spell_name
 var spell_prefs: Dictionary
+var spell_hotkey: String
 
 var is_spellchooser: bool = false
-
-var pressed: bool
+var pressed: bool = false
 
 func set_spell_name(_n: String):
 	spell_name = _n	
@@ -17,6 +17,7 @@ func set_ui_icon(_icon: String):
 	get_node("Button").icon = load(_icon)
 
 func set_hotkey(_hk: String):
+	spell_hotkey = _hk
 	get_node("hotkey").text = _hk
 
 ############################

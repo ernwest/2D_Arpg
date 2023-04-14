@@ -6,7 +6,7 @@
 		"gameprefs": {
 			"manacost": 10,
 			"damage": 50,
-			"cooldown": 0.5,
+			"cooldown": 9.0,
 			"projectiles": 3,
 			"pierce": 5,
 			"speed": 700,

@@ -11,7 +11,7 @@ var spell_bar: SpellBar = SpellBar.new()
 var player_circle: CollisionShape2D
 var player_circle_side: Node2D
 
-var skills_cooldowns: Array = [true, true]
+var skills_cooldowns: Array
 
 var move_vector: Vector2 = Vector2.ZERO
 var speed_sum: float  = default_vars.speed
@@ -36,7 +36,11 @@ func _ready():
 	camera = $"../PlayerCamera"
 	
 	spell_bar.push_spells_to_bar(_cl)
+	spell_bar.push_spells_to_dict(_cl)
 	player_creator(player)
+	
+	for spell in spell_bar.spell_bar:
+		skills_cooldowns.push_back(true)
 	
 func _process(delta):
 	player_circle_look_at()
@@ -91,14 +95,25 @@ func keyboard_input():
 		GUI.change_visible(ui_inventory)
 
 func spell_input_handler():
-	if Input.is_action_pressed("Q") and skills_cooldowns[0]:
-		init_spell(0)
-	if Input.is_action_pressed("W") and skills_cooldowns[1]:
-		init_spell(1)
+	var i: int = 0
+	var spell_hk: Dictionary = spell_bar.spell_hk
+	for spell in spell_hk:
+		if Input.is_action_pressed(spell) and skills_cooldowns[i]:
+			init_spell(spell_hk[spell], i)
+		i += 1
 		
-func init_spell(id: int):
-	start_spell(id)
-	set_cooldown(id)
+#	if Input.is_action_pressed("Q") and skills_cooldowns[0]:
+#		init_spell(0)
+#	if Input.is_action_pressed("W") and skills_cooldowns[1]:
+#		init_spell(1)
+		
+#func init_spell(id: int):
+#	start_spell(id)
+#	set_cooldown(id)
+
+func init_spell(spell: Dictionary, i: int):
+	start_spell(spell)
+	set_cooldown(i)
 		
 func set_cooldown(id: int):
 	var timer: float
@@ -108,9 +123,9 @@ func set_cooldown(id: int):
 	skills_cooldowns[id] = false
 	await get_tree().create_timer(timer).timeout
 	skills_cooldowns[id] = true
-
-func start_spell(spell_bar_id: int): 
-	var spell: Dictionary = spell_bar.get_spell(spell_bar_id).duplicate(true)
+	
+func start_spell(_spell_dict: Dictionary): 
+	var spell: Dictionary = _spell_dict.duplicate(true)
 	
 	if spell.gameprefs.manacost > player.prefs.current_mana: return
 	player.prefs.current_mana -= spell.gameprefs.manacost
@@ -130,6 +145,28 @@ func start_spell(spell_bar_id: int):
 		Spell.ETYPE.PlayerAoE:
 			var _scene_tree: Node2D = get_tree().get_current_scene()
 			node_spell.spell_create(_scene_tree, spell)
+
+#func start_spell(spell_bar_id: int): 
+#	var spell: Dictionary = spell_bar.get_spell(spell_bar_id).duplicate(true)
+#
+#	if spell.gameprefs.manacost > player.prefs.current_mana: return
+#	player.prefs.current_mana -= spell.gameprefs.manacost
+#
+#	var node_spell: Spell = spell_node_creator(spell)
+#	node_spell.player = player
+#
+#	audio.stream = load(spell.techprefs.audio)
+#	audio.playing = true
+#
+#
+#	var type: int = spell.type
+#	match type:
+#		Spell.ETYPE.Projectile:
+#			var _scene_tree: Node2D = get_tree().get_current_scene()
+#			node_spell.spell_create(_scene_tree, player_circle, spell)
+#		Spell.ETYPE.PlayerAoE:
+#			var _scene_tree: Node2D = get_tree().get_current_scene()
+#			node_spell.spell_create(_scene_tree, spell)
 		
 
 func spell_node_creator(spell: Dictionary):

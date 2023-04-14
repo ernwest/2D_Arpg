@@ -103,3 +103,4 @@ visible = false
 player = NodePath("../Player")
 
 [node name="UI_SpellChooser" parent="." instance=ExtResource("8_vdi53")]
+visible = false
