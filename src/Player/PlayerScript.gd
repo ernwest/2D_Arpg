@@ -98,8 +98,8 @@ func spell_input_handler():
 	var i: int = 0
 	var spell_hk: Dictionary = spell_bar.spell_hk
 	for spell in spell_hk:
-		if Input.is_action_pressed(spell) and skills_cooldowns[i]:
-			init_spell(spell_hk[spell], i)
+		if Input.is_action_pressed(spell) and !spell_hk[spell].is_cooldown:
+			init_spell(spell_hk[spell])
 		i += 1
 		
 #	if Input.is_action_pressed("Q") and skills_cooldowns[0]:
@@ -111,18 +111,18 @@ func spell_input_handler():
 #	start_spell(id)
 #	set_cooldown(id)
 
-func init_spell(spell: Dictionary, i: int):
+func init_spell(spell: Dictionary):
 	start_spell(spell)
-	set_cooldown(i)
+	set_cooldown(spell)
 		
-func set_cooldown(id: int):
+func set_cooldown(spell: Dictionary):
 	var timer: float
-	timer = spell_bar.get_spell(id).gameprefs.cooldown
+	timer = spell.gameprefs.cooldown
 	timer /= player.prefs.red_cooldown
 	
-	skills_cooldowns[id] = false
+	spell.is_cooldown = true
 	await get_tree().create_timer(timer).timeout
-	skills_cooldowns[id] = true
+	spell.is_cooldown = false
 	
 func start_spell(_spell_dict: Dictionary): 
 	var spell: Dictionary = _spell_dict.duplicate(true)

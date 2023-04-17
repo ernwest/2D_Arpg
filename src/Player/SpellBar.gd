@@ -1,7 +1,7 @@
 class_name SpellBar extends Node2D
 
 var spell_bar: Array = []
-var hotkeys: Array = ["Q", "W"]
+var hotkeys: Array = ["Q", "W", "E", "R", "T"]
 var spell_hk: Dictionary
 
 func get_spell(id: int) -> Dictionary:
@@ -18,4 +18,5 @@ func push_spells_to_dict(cl: PlayerClass):
 	for spell in cl.spells:
 		var sp: Dictionary = cl.spells[spell]
 		spell_hk[hotkeys[i]] = sp
+		spell_hk[hotkeys[i]].is_cooldown = false
 		i += 1

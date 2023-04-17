@@ -2,6 +2,8 @@ extends Control
 
 var player: Player
 
+var ui_spell_bar: Node
+
 var _mouse_in_ui: bool = false
 
 func change_visible(_node: Node, always_show: bool = false):
@@ -20,6 +22,7 @@ func set_ui_focus():
 func change_spellbar(new_spell: Node, old_spell: Node, _spell_bar: Node):
 	old_spell.spell_name = new_spell.spell_name
 	old_spell.spell_prefs = new_spell.spell_prefs
+	old_spell.set_ui_icon(new_spell.ui_icon)
 
 	player.spell_bar.spell_hk[old_spell.spell_hotkey] = new_spell.spell_prefs
 	

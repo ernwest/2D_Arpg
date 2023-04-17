@@ -3,6 +3,7 @@ extends Node
 var spell_name
 var spell_prefs: Dictionary
 var spell_hotkey: String
+var ui_icon: Texture2D
 
 var is_spellchooser: bool = false
 var pressed: bool = false
@@ -13,8 +14,9 @@ func set_spell_name(_n: String):
 func set_spell_prefs(_prefs: Dictionary):
 	spell_prefs = _prefs
 
-func set_ui_icon(_icon: String):
-	get_node("Button").icon = load(_icon)
+func set_ui_icon(_icon: Texture2D):
+	ui_icon = _icon
+	get_node("Button").icon = ui_icon
 
 func set_hotkey(_hk: String):
 	spell_hotkey = _hk
