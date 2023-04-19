@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqp4i8pif3dyu"]
+[gd_scene load_steps=5 format=3 uid="uid://bqp4i8pif3dyu"]
 
 [ext_resource type="Script" path="res://src/UI/UI_Script.gd" id="1_bolpd"]
 [ext_resource type="Script" path="res://src/UI/UI_SpellBar.gd" id="2_4bugn"]
 [ext_resource type="PackedScene" uid="uid://lhms84reke75" path="res://src/UI/UI_Spell/UI_Spell.tscn" id="3_u2ija"]
+[ext_resource type="PackedScene" uid="uid://btuhjuukdhfam" path="res://src/UI/UI_Spell/UI_Spell_Text.tscn" id="4_se2jq"]
 
 [node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("health_text", "mana_text", "Container_SkillBar", "Skill_Bar")]
 script = ExtResource("1_bolpd")
@@ -60,16 +61,15 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Center" type="AspectRatioContainer" parent="Lower/HBoxContainer"]
-clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Skillbar" type="HBoxContainer" parent="Lower/HBoxContainer/Center"]
-clip_contents = true
 layout_direction = 2
 layout_mode = 2
 script = ExtResource("2_4bugn")
 spell_ui = ExtResource("3_u2ija")
+spell_text_ui = ExtResource("4_se2jq")
 
 [node name="Right" type="AspectRatioContainer" parent="Lower/HBoxContainer"]
 clip_contents = true

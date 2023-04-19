@@ -27,15 +27,15 @@ var prefs: Dictionary = {
 	
 	"speed_multi" = 3.2,
 	
-	"added_damage" = 0,
+	"added_damage" = 10000,
 	"added_projectile_damage" = 100,
-	"added_aoe_damage" = 10,
+	"added_aoe_damage" = 1,
 	
 	"added_projectiles" = 3,
 	
 	"inc_damage" = 1.0,
 	"inc_projectile_damage" = 1.0,
-	"inc_aoe_damage" = 5.0,
+	"inc_aoe_damage" = 1.0,
 	
 	"inc_aoe_radius" = 2.0,
 	
