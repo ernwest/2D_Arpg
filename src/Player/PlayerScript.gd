@@ -192,7 +192,8 @@ func spell_node_creator(spell: Dictionary):
 	
 	return node_spell
 	
-func sync_spell_with_player(_spell: Dictionary):
+func sync_spell_with_player(_spell: Dictionary, is_ui: bool = false):
+	if is_ui: _spell = _spell.duplicate(true)
 	var s_prefs: Dictionary = _spell.gameprefs
 	var p_prefs: Dictionary = player.prefs
 	

@@ -39,7 +39,7 @@ func ui_create_spells(_node: Node, i: int, parent: Node):
 	butt.mouse_entered.connect(_on_button_mouse_entered.bind(new_node))
 	butt.mouse_exited.connect(_on_button_mouse_exited.bind(new_node))
 	
-	var sp: Dictionary = GUI.player.sync_spell_with_player(spell_bar.spell_bar[i])
+	var sp: Dictionary = GUI.player.sync_spell_with_player(spell_bar.spell_bar[i], true)
 	set_node(new_node, sp)
 	new_node.set_hotkey(hotkeys[i])
 	
